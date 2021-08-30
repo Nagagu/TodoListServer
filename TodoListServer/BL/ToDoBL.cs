@@ -35,9 +35,6 @@ namespace TodoListServer.BL
             _dbContext.SaveChanges();
         }
 
-        public List<ToDo> GetPendingToDos()
-        {
-            return _dbContext.ToDos.Where(o => o.IsDone == false).ToList();
-        }
+
     }
 }

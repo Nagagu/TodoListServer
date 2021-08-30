@@ -13,6 +13,10 @@ using System.Threading.Tasks;
 using TodoListServer.BBDD;
 using Microsoft.EntityFrameworkCore;
 using TodoListServer.BL;
+using Swashbuckle.AspNetCore;
+using Swashbuckle.AspNetCore.Swagger;
+using Swashbuckle.AspNetCore.SwaggerGen;
+using Swashbuckle.AspNetCore.SwaggerUI;
 
 namespace TodoListServer
 {
@@ -32,6 +36,7 @@ namespace TodoListServer
             services.AddDbContext<ToDoDbContext>(o => o.UseInMemoryDatabase("TodoDatabase"));
             services.AddScoped<IToDoDbContext>(provider => provider.GetService<ToDoDbContext>());
             services.AddTransient<ToDoBL>();
+            services.AddSwaggerGen();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
@@ -51,6 +56,12 @@ namespace TodoListServer
             app.UseEndpoints(endpoints =>
             {
                 endpoints.MapControllers();
+            });
+
+            app.UseSwagger();
+            app.UseSwaggerUI(c =>
+            {
+                c.SwaggerEndpoint("/swagger/v1/swagger.json", "My API V1");
             });
         }
     }
