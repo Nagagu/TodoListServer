@@ -17,9 +17,19 @@ namespace TodoListServer.Controllers
         [Route("")]
         [HttpGet]
         [AllowAnonymous]
-public IActionResult Index()
+        [ApiExplorerSettings(IgnoreApi = true)]
+        public IActionResult Index()
         {
-            return Redirect("/swagger/ui/index.html");
+            return Redirect("/swagger/");
+        }
+
+        [Route("/")]
+        [HttpGet]
+        [AllowAnonymous]
+        [ApiExplorerSettings(IgnoreApi = true)]
+        public IActionResult Swagger()
+        {
+            return Redirect("/swagger");
         }
     }
 }
